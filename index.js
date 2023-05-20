@@ -1,4 +1,3 @@
-// followinr tutorial https://dev.to/beznet/build-a-rest-api-with-node-express-mongodb-4ho4
 import mongoose from 'mongoose';
 import express from 'express'
 import { config } from 'dotenv';
@@ -20,6 +19,18 @@ app.use(express.json()) // allow us to parse json
 // set up routes
 app.use('/tasks', tasksRouter)
 
+app.use(express.json({
+    verify: (req, res, buf) => {
+        req.rawBody = buf.toString();
+    }
+}));
+
+app.use((req, res, next) => {
+    console.log(req.rawBody);
+    next();
+});
+
+
 // start server
-app.listen(3005, () => console.log('server started'))
+app.listen(3004, () => console.log('server started'))
 

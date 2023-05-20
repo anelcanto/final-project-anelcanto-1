@@ -4,6 +4,11 @@ const taskSchema = new Mongoose.Schema({
     title:{
         type: String,
         required: true
+    },    
+    completed:{
+        type: Boolean,
+        required: true,
+        default: false
     },
     description:{
         type: String,
@@ -13,45 +18,19 @@ const taskSchema = new Mongoose.Schema({
         type: Date,
         required: false
     },
-    completed:{
-        type: Boolean,
-        required: true
-    },
     priority:{
         type: Number,
         required: true,
         min: 1,
-        max: 4
+        max: 4,
+        default: 1
     },
     labels:{
         type: [String],
         required: false
     },
-    // user_id:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User",
-    //     required: true
-    // },
-    // project_id:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Project",
-    //     required: false
-    // },
-    // section_id:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Section",
-    //     required: false
-    // },
-    created_at:{
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    updated_at:{
-        type: Date,
-        required: true,
-        default: Date.now
-    }
-})
+}, { 
+    timestamps: true // this option adds `createdAt` and `updatedAt` fields to your schema.
+});
 
 export default Mongoose.model('Task', taskSchema);

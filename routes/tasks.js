@@ -3,31 +3,31 @@ import Task from '../models/task.js';
 
 const router = Router();
 
-router.route('/')
-    // GET all tasks endpoint
-    .get((req, res) => {
-        res.send('Hello World!')
-    })
-    // POST a new task endpoint
-    .post((req, res) => {
-        
+router.get('/', async (req, res) => {
+    try {
+        const tasks = await Task.find();
+        res.json(tasks);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.post('/', async (req, res) => {
+    const task = new Task({
+        title: req.body.title,
+        completed: req.body.completed,
+        description: req.body.description,
+        due_date: req.body.due_date,
+        priority: req.body.priority,
+        labels: req.body.labels
     });
 
-router.route('/:id')
-    // GET a task by id endpoint
-    .get((req, res) => {
+    try {
+        const newTask = await task.save();
+        res.status(201).json(newTask);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 
-    })
-
-    // UPDATE a task by id endpoint
-    .put((req, res) => {
-
-    })
-
-    // DELETE a task by id endpoint
-    .delete((req, res) => {
-
-    }); 
-
-export default Task;
-
+export default router;
