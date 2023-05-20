@@ -1,9 +1,14 @@
-import mongo from 'mongodb';
+import mongoose from 'mongoose';
 import express from 'express'
+import { config } from 'dotenv';
 
-const app = express()
-const pass = process.env.MONGO_PASS;
-const user = process.env.MONGO_USER;
-const uri = `mongodb+srv://${user}:${pass}@cluster0.61s1myb.mongodb.net/?appName=mongosh+1.9.0`;
+config(); // config the dotenv environment using biult in config method
+const app = express();
+const uri = process.env.MONGO_URI;
 
+mongoose.connect(uri, { useNewUrlParser: true })
+console.log("uri: ", uri);
+const db = mongoose.connection
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('connected to database'))
 app.listen(3000, () => console.log('server started'))
