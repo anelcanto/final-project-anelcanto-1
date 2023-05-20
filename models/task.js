@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import Mongoose from "mongoose";
 
-taskSchema = new mongoose.Schema({
+const taskSchema = new Mongoose.Schema({
     title:{
         type: String,
         required: true
@@ -44,28 +44,14 @@ taskSchema = new mongoose.Schema({
     // },
     created_at:{
         type: Date,
-        required: true
+        required: true,
+        default: Date.now
     },
     updated_at:{
         type: Date,
-        required: true
+        required: true,
+        default: Date.now
     }
-
 })
 
-/** 
-    add schema with the following fields:
-    - id
-	- title
-	- description
-	- due_date
-	- completed
-	- priority
-	- labels (array of strings)
-	- user_id (references User)
-	- project_id (references Project, optional)
-	- section_id (references Section, optional)
-	- created_at
-	- updated_at
-
-*/
+export default Mongoose.model('Task', taskSchema);

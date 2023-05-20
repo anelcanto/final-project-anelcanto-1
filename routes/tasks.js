@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import Task from '../models/task.js';
 
 const router = Router();
 
@@ -26,10 +27,7 @@ router.route('/:id')
     // DELETE a task by id endpoint
     .delete((req, res) => {
 
-    });
+    }); 
 
-    
-        
-
-export default router;
+export default Task;
 
