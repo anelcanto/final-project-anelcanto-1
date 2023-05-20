@@ -2,9 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-// Define your routes and middleware here
-
-
 router.route('/')
     // GET all tasks endpoint
     .get((req, res) => {
@@ -14,7 +11,7 @@ router.route('/')
     .post((req, res) => {
         
     });
-    
+
 router.route('/:id')
     // GET a task by id endpoint
     .get((req, res) => {
