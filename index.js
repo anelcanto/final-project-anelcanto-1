@@ -32,5 +32,5 @@ app.use((req, res, next) => {
 
 
 // start server
-app.listen(3004, () => console.log('server started'))
+app.listen(3000, () => console.log('server started'))
 
