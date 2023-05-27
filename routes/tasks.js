@@ -46,6 +46,7 @@ router.patch('/:id', async (req, res) => {
         task.completed = req.body.completed;
         task.description = req.body.description;
         task.due_date = req.body.due_date;
+        req.body.priority? task.priority = req.body.priority: task.priority;
         task.priority = req.body.priority;
         task.labels = req.body.labels;
         const updatedTask = await task.save();
@@ -58,7 +59,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
-        const deletedTask = await task.remove();
+        const deletedTask = await task.deleteOne()
         res.json(deletedTask);
     } catch (err) {
         res.status(500).json({ message: err.message });
