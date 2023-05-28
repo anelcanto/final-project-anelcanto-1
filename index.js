@@ -4,8 +4,8 @@ import { config } from 'dotenv';
 import tasksRouter from './routes/tasks.js'
 
 config(); // config the dotenv environment using biult in config method
-// const uri = process.env.MONGO_URI;
-const uri = "mongodb://mongo:27017/tasks_db" // Docker mongo db
+const uri = process.env.MONGO_URI;
+// const uri = "mongodb://mongo:27017/tasks_db" // Docker mongo db
 // const uri = "mongodb://localhost:27017/tasks_db" // local mongo db
 const PORT = process.env.PORT || 3000;
 

@@ -1,5 +1,10 @@
 {
-  "name": "quiz-api",
+
+
+  "engines": {
+    "node": "18.16"
+  },
+  "name": "tasks-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
