@@ -67,8 +67,17 @@ router.route('/tasks/:id')
             res.status(500).json({ message: err.message });
         }
     });
-
-
+// you can host this api on the fllowin sites for free:
+// https://www.heroku.com/
+// https://www.netlify.com/
+// https://www.vercel.com/
+// https://www.digitalocean.com/
+// https://www.pythonanywhere.com/
+// https://www.000webhost.com/
+// https://www.infinityfree.net/
+// https://www.000webhost.com/
+// https://www.000webhost.com/
+// als read this article: https://www.freecodecamp.org/news/where-to-deploy-your-apps-for-free-9a4cda4e2d7a/
 
 
 export default router;
