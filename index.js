@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import express from 'express'
 import { config } from 'dotenv';
-import tasksRouter from './routes/tasks.js'
+import routes from './routes.js'
 
 config(); // config the dotenv environment using biult in config method
-const uri = process.env.MONGO_URI;
-// const uri = "mongodb://mongo:27017/tasks_db" // Docker mongo db
+// const uri = process.env.MONGO_URI;
+const uri = "mongodb://mongo:27017/tasks_db" // Docker mongo db
 // const uri = "mongodb://localhost:27017/tasks_db" // local mongo db
 const PORT = process.env.PORT || 3000;
 
@@ -21,7 +21,7 @@ db.once('open', () => {
     app.use(express.json()) // allows us to parse json
 
     // Routes
-    app.use('/tasks', tasksRouter)       
+    app.use('/api', routes)   
 
     app.listen(PORT, () => console.log('server started')) // set up routes
 
