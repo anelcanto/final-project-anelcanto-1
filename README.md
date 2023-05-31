@@ -7,15 +7,6 @@ This is a simple API that allows you to create, read, update and delete tasks. I
 > Preview: [Tasks API](https://web-production-8d7a.up.railway.app/api/tasks)
 
 
-## Table of Contents
-- [Setup](#setup)
-- [Endpoints](#endpoints)
-- [Connect to MongoDB](#connect-to-mongodb)
-- [Stack](#stack)
-    - [Dependencies](#dependencies)
-- [Author](#author)
-
-
 ## Setup
 1. Clone this repo
 2. Run `docker-compose up` to start the server
