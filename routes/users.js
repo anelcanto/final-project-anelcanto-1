@@ -1,9 +1,8 @@
 import Router from 'express';
 import User from '../models/user.js';
 
-const router = Router();
-
-router.route('/users/')
+const userRoutes = Router();
+userRoutes.route('/users/')
     .get(async (req, res) => {
         try {
             const users = await User.find();
@@ -29,7 +28,7 @@ router.route('/users/')
         }
     });
 
-router.route('/users/:id')
+userRoutes.route('/users/:id')
     .get(async (req, res) => {
         try {
             const user = await User.findById(req.params.id);
@@ -62,7 +61,8 @@ router.route('/users/:id')
         }
     });
 
-export default router;
+export default userRoutes;
+
 
 
 

@@ -29,12 +29,12 @@ const taskSchema = new Mongoose.Schema({
         type: [String],
         required: false
     },
-    user_id:{
-        type: String,
-        required: true
-    },
+    // user_id:{
+    //     type: String,
+    //     required: true
+    // },
 }, { 
-    timestamps: true // this option adds `createdAt` and `updatedAt` fields to your schema.
+    timestamps: true 
 });
 
 export default Mongoose.model('Task', taskSchema);

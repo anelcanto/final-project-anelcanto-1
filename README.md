@@ -10,7 +10,7 @@ This is a simple API that allows you to create, read, update and delete tasks. I
 
 1. Clone this repo
 2. Run `docker-compose up` to start the server
-3. (Optional) Change the URI string in the .env file to connect to your own MongoDB instance or hardcode it into the `index.js` file. See [Connect to MongoDB](#connect-to-mongodb) for more details.
+3. (Optional) Change the URI string in the .env file to connect to your own MongoDB instance or hardcode it into the `app.js` file. See [Connect to MongoDB](#connect-to-mongodb) for more details.
 4. Run the endpoints in your browser or Postman. See [Endpoints](#endpoints) for more details.
 
 ## Endpoints
@@ -30,7 +30,7 @@ If you run your code locally replace the url before the endpoints with `localhos
 There are three ways to connect to a MongoDB instance:
 
 1. Atlas Cloud: Add your URI string to the .env file
-2. Local: Add your URI string to the .env file or hardcode into the `index.js` file
+2. Local: Add your URI string to the .env file or hardcode into the `app.js` file
 3. Dockerfile: To connect to the mongo instance created by the Dockerfile in this repo you can hardcode the string:
    `mongodb://mongo:27017/tasks_db` as the URI or,
    add to your .env file `MONGO_URI="mongodb://mongo:27017/tasks_db"`
