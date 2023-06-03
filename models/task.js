@@ -1,4 +1,4 @@
-import Mongoose from "mongoose";
+import Mongoose from 'mongoose';
 
 const taskSchema = new Mongoose.Schema({
     title:{
@@ -28,6 +28,10 @@ const taskSchema = new Mongoose.Schema({
     labels:{
         type: [String],
         required: false
+    },
+    user_id:{
+        type: String,
+        required: true
     },
 }, { 
     timestamps: true // this option adds `createdAt` and `updatedAt` fields to your schema.
