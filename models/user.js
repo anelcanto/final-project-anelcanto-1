@@ -8,11 +8,11 @@ const userSchema = new Mongoose.Schema({
         minlength: 3,
         maxlength: 20,
     },
-    password:{
+   hashed_password:{
         type: String,
         required: true,
         minlength: 8,
-        maxlength: 20
+        maxlength: 1024
     },
     email:{
         type: String,
