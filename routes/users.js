@@ -1,8 +1,9 @@
 import Router from 'express';
 import User from '../models/user.js';
+import bcrypt from 'bcrypt';
 
-const userRoutes = Router();
-userRoutes.route('/users/')
+const router = Router();
+router.route('/')
     .get(async (req, res) => {
         try {
             const users = await User.find();
@@ -14,7 +15,7 @@ userRoutes.route('/users/')
     .post(async (req, res) => {
         const user = new User({
             username: req.body.username,
-            password: req.body.password,
+            hashed_password: await bcrypt.hash(req.body.password, 10),
             email: req.body.email,
             first_name: req.body.first_name,
             last_name: req.body.last_name
@@ -22,13 +23,14 @@ userRoutes.route('/users/')
 
         try {
             const newUser = await user.save();
-            res.status(201).json(newUser);
+            // res.status(201).json(newUser);
+            res.status(201).json({ message: "User created successfully" });
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     });
 
-userRoutes.route('/users/:id')
+router.route('/:id')
     .get(async (req, res) => {
         try {
             const user = await User.findById(req.params.id);
@@ -47,7 +49,7 @@ userRoutes.route('/users/:id')
             user.last_name = req.body.last_name;
             const updatedUser = await user.save();
             res.json(updatedUser);
-        } catch (err) { 
+        } catch (err) {
             res.status(400).json({ message: err.message });
         }
     })
@@ -61,7 +63,7 @@ userRoutes.route('/users/:id')
         }
     });
 
-export default userRoutes;
+export default router;
 
 
 
