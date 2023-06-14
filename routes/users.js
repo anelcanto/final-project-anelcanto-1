@@ -1,6 +1,5 @@
 import Router from 'express';
-import User from '../models/user.js';
-import bcrypt from 'bcrypt';
+import User from '../models/User.js';
 
 const router = Router();
 router.route('/')
@@ -15,7 +14,7 @@ router.route('/')
     .post(async (req, res) => {
         const user = new User({
             username: req.body.username,
-            hashed_password: await bcrypt.hash(req.body.password, 10),
+            // hashed_password: await bcrypt.hash(req.body.password, 10),
             email: req.body.email,
             first_name: req.body.first_name,
             last_name: req.body.last_name
@@ -23,8 +22,8 @@ router.route('/')
 
         try {
             const newUser = await user.save();
-            // res.status(201).json(newUser);
-            res.status(201).json({ message: "User created successfully" });
+            res.status(201).json(newUser);
+            // res.status(201).json({ message: "User created successfully" });
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
