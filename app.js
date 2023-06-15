@@ -1,18 +1,17 @@
+//import packages
 import mongoose from "mongoose";
 import express from "express";
 import dotenv, { config } from "dotenv";
 import session from 'express-session';
-// import the defautl from config/config.js
 import { sessionSecret } from './config/config.js';
-
 
 dotenv.config();
 
+// import routes
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
 // import tasksRouter from "./routes/tasks.js";
 
-// import signupRoute from "./routes/signup.js";
 import usersRouter from "./routes/users.js";
 
 const URI = process.env.MONGO_URI || "mongodb://localhost:27017/tasks_db";
@@ -36,7 +35,7 @@ db.once('open', () => {
     app.use(express.json()) // Middleware for parsing JSON
 
     // app.use('/auth', authRoutes); // Mount the authentication routes
-    app.use('/api', protectedRoutes);  // Mount the protected routes
+    app.use('/api/protected', protectedRoutes);  // Mount the protected routes
     app.use('/api/auth', authRoutes); // Mount the authentication routes
     app.listen(PORT, () => console.log('server started')) // Start server
 })
