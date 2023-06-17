@@ -1,40 +1,39 @@
 import Mongoose from 'mongoose';
 
 const taskSchema = new Mongoose.Schema({
-    title:{
+    title: {
         type: String,
         required: true
-    },    
-    completed:{
+    },
+    completed: {
         type: Boolean,
         required: true,
         default: false
     },
-    description:{
+    description: {
         type: String,
         required: false
     },
-    due_date:{
+    due_date: {
         type: Date,
         required: false
     },
-    priority:{
+    priority: {
         type: Number,
         required: true,
         min: 1,
         max: 4,
         default: 1
     },
-    labels:{
+    labels: {
         type: [String],
         required: false
     },
-    // user_id:{
-    //     type: String,
-    //     required: true
-    // },
-}, { 
-    timestamps: true 
-});
+    user: {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
+}, { timestamps: true });
 
 export default Mongoose.model('Task', taskSchema);

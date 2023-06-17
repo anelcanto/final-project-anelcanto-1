@@ -1,17 +1,18 @@
+console.log("enter routes/tasks.js");
 import express from 'express';
 import { getTasks, getTaskById, createTask, updateTask, deleteTask } from '../controllers/TaskController.js';
-import { requireAuth } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
+console.log("inside routes/tasks.js");
 router.route('/')
     .get(getTasks)
-    .post(requireAuth, createTask);
+    .post(createTask);
 
 router.route('/:id')
     .get(getTaskById)
-    .patch(requireAuth, updateTask)
-    .delete(requireAuth, deleteTask);
+    .patch(updateTask)
+    .delete(deleteTask);
 
-export { router as tasksRoutes };
+export default router;
 

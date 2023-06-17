@@ -1,14 +1,14 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
-import morgan from 'morgan';
-import { config } from 'dotenv';
+const router = express.Router();
 import jwt from 'jsonwebtoken';
-
+import { requireAuth } from '../middleware/authMiddleware.js';
+import { config } from 'dotenv';
 config();
 
-const router = express.Router();
 const secret = process.env.JWT_SECRET;
+
 
 // User registration route
 router.post('/signup', async (req, res) => {
@@ -33,8 +33,6 @@ router.post('/signup', async (req, res) => {
             last_name,
         });
 
-        router.use(morgan('dev'));
-
         // Save the user to the database
         await newUser.save();
 
@@ -56,6 +54,8 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
+        console.log("user: ", user);
+
         // Compare the password
         const isPasswordValid = await bcrypt.compare(password, user.hashed_password);
         if (!isPasswordValid) {
@@ -64,10 +64,11 @@ router.post('/login', async (req, res) => {
 
         // Create a payload for the JWT
         const payload = {
+            id: user._id,
             username: user.username,
             email: user.email,
         };
-
+        console.log("payload", payload);
 
         // Sign the JWT
         const token = jwt.sign(payload, secret, { expiresIn: '1h' });
@@ -83,7 +84,7 @@ router.post('/login', async (req, res) => {
 });
 
 // User logout route
-router.post('/logout', (req, res) => {
+router.post('/logout', requireAuth, (req, res) => {
     // Clear the user session or invalidate the token
     res.json({ message: 'User logged out successfully' });
 });

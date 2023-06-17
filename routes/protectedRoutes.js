@@ -1,19 +1,25 @@
 import express from 'express';
 import { requireAuth } from '../middleware/authMiddleware.js';
-import { tasksRoutes } from '../routes/tasks.js';
+import { isAdmin, isOwner } from '../middleware/userMiddleware.js';
+import tasksRouter from './tasks.js';
+import usersRouter from './users.js';
 
 const router = express.Router();
 
 // Middleware to protect the routes
 router.use(requireAuth);
 
-// Protected routes
-router.get('/', (req, res) => {
-    // Access the authenticated user's information through req.session.user
-    res.json({ message: 'Protected route accessed successfully', user: req.session.user });
-});
+// Protected routes for tasks
+router.use('/tasks', tasksRouter);
 
-// Mount the tasks routes under the protected routes
-router.use('/tasks', tasksRoutes);
+// Protected routes for users
+router.use('/users', (req, res, next) => {
+    // Check if user is an admin or owner of the user
+    if (isAdmin(req.user) || req.userId === req.params.userId) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Unauthorized access' });
+    }
+}, usersRouter);
 
 export default router;

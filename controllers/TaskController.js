@@ -8,6 +8,7 @@ export const {
     deleteTask
 } = {
     getTasks: asyncHandler(async (req, res) => {
+        console.log("enter getTasks");
         const tasks = await Task.find({});
         res.json(tasks);
     }),
@@ -16,7 +17,7 @@ export const {
         if (task) {
             res.json(task);
         }
-        else {  
+        else {
             res.status(404).json({ message: 'Task not found' });
         }
     }),
@@ -28,7 +29,7 @@ export const {
             due_date: req.body.due_date,
             priority: req.body.priority,
             labels: req.body.labels,
-            user_id: req.body.user_id
+            user: req.user
         });
         const newTask = await task.save();
         res.status(201).json(newTask);
@@ -42,10 +43,11 @@ export const {
             task.due_date = req.body.due_date;
             task.priority = req.body.priority;
             task.labels = req.body.labels;
-            task.user_id = req.body.user_id;
+            task.user = req.user;
+
             const updatedTask = await task.save();
             res.json(updatedTask);
-        }else {
+        } else {
             res.status(404).json({ message: 'Task not found' });
         }
     }),

@@ -11,10 +11,10 @@ const userSchema = new Mongoose.Schema({
         type: String, required: true, unique: true, minlength: 5, maxlength: 50
     },
     first_name: {
-        type: String, required: true, minlength: 2, maxlength: 20
+        type: String, required: false, minlength: 2, maxlength: 20
     },
     last_name: {
-        type: String, required: true, minlength: 2, maxlength: 20
+        type: String, required: false, minlength: 2, maxlength: 20
     },
     role: {
         type: String, required: true, enum: ['admin', 'user'], default: 'user'
