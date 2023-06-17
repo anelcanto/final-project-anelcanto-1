@@ -13,12 +13,20 @@ const secret = process.env.JWT_SECRET;
 // User registration route
 router.post('/signup', async (req, res) => {
     try {
-        const { username, password, email, first_name, last_name } = req.body;
+        const { username, password, email, role, first_name, last_name } = req.body;
 
         // Check if the username or email is already registered
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
             return res.status(409).json({ message: 'Username or email already exists' });
+        }
+
+        // only accept admin creation in this way if there is no admin in the database
+        if (role == "admin") {
+            const existingAdmin = await User.findOne({ role: "admin" });
+            if (existingAdmin) {
+                return res.status(409).json({ message: 'Not authorized to create admin' });
+            }
         }
 
         // Hash the password
@@ -31,7 +39,9 @@ router.post('/signup', async (req, res) => {
             email,
             first_name,
             last_name,
+            role
         });
+
 
         // Save the user to the database
         await newUser.save();

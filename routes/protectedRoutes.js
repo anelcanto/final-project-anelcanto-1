@@ -12,10 +12,12 @@ router.use(requireAuth);
 // Protected routes for tasks
 router.use('/tasks', tasksRouter);
 
+
+
 // Protected routes for users
 router.use('/users', (req, res, next) => {
     // Check if user is an admin or owner of the user
-    if (isAdmin(req.user) || req.userId === req.params.userId) {
+    if (isAdmin(req.user) || isOwner(req.user, req.params.id)) {
         next();
     } else {
         res.status(401).json({ error: 'Unauthorized access' });
