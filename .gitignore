@@ -1,3 +1,6 @@
+
+client/* !client/.gitignore
+
 # Ignore node_modules directory
 node_modules/
 data/
@@ -10,6 +13,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+
+.git
 
 # Ignore environment-specific files
 .env
