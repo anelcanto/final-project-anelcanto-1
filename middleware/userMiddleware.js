@@ -1,16 +1,17 @@
-
-export const isAdmin = (user) => {
-    if (user && user.roles && user.roles.includes('admin')) {
-        return true;
+export const isAdmin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        next();
     } else {
-        return false;
+        res.status(403).json({ message: 'User is not an admin' });
     }
 };
 
-export const isOwner = (user, resourceId) => {
-    if (user && user.resources && user.resources.includes(resourceId)) {
-        return true;
+export const isOwner = async (req, res, next) => {
+    const resourceId = req.params.id; // Or wherever the ID of the resource is located in your request
+
+    if (req.user && req.user.resources && req.user.resources.includes(resourceId)) {
+        next();
     } else {
-        return false;
+        res.status(403).json({ message: 'User does not have permission' });
     }
 };

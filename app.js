@@ -3,10 +3,8 @@ import mongoose from "mongoose";
 import express from "express";
 import morgan from "morgan";
 
-// import routes
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
-
 
 const URI = process.env.MONGO_URI || "mongodb://localhost:27017/tasks_db";
 const PORT = process.env.PORT || 3000;

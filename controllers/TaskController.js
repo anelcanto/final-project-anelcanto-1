@@ -8,9 +8,9 @@ export const {
     deleteTask
 } = {
     getTasks: asyncHandler(async (req, res) => {
-        console.log("enter getTasks");
-        const tasks = await Task.find({});
+        const tasks = await Task.find({ user: req.user });
         res.json(tasks);
+
     }),
     getTaskById: asyncHandler(async (req, res) => {
         const task = await Task.findById(req.params.id);

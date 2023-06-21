@@ -9,7 +9,6 @@ config();
 
 const secret = process.env.JWT_SECRET;
 
-
 // User registration route
 router.post('/signup', async (req, res) => {
     try {
