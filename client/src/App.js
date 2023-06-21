@@ -1,29 +1,28 @@
-import './App.css';
-import TodoList from './components/TodoList/TodoList';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
+import "./App.css";
+// import NavBar from "./components/NavBar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import Blog from "./components/pages/Blog";
+// import { Contact } from "./components/Pages/Contact";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Router>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/entities">Entities</Link>
-        </nav>
-        <Switch>
-          <Route path="/signup" />
-          <Route path="/login" />
-          <Route path="/tasks" />
-          <Route path="/" />
-        </Switch>
+        <NavBar />
+
+        <div className="pages">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            {/* <Route path="/contact" element={<Contact />} /> */}
+          </Routes>
+        </div>
       </Router>
-
-      <TodoList />
-
-    </div>
+    </>
   );
 }
 
