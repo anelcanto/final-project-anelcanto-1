@@ -1,18 +1,18 @@
 import express from 'express';
-import { getUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/UserController.js';
+import { getTasks, getTaskById, createTask, updateTask, deleteTask } from '../controllers/TaskController.js';
 import { isOwner } from '../middleware/userMiddleware.js';
 
 const router = express.Router();
 
 router.route('/')
 
-    .get(getUsers, isOwner)
-    .post(createUser);
+    .get(getTasks, isOwner)
+    .post(createTask);
 
 router.route('/:id')
-    .get(getUserById, isOwner)
-    .patch(updateUser, isOwner)
-    .delete(deleteUser, isOwner);
+    .get(getTaskById, isOwner)
+    .patch(updateTask, isOwner)
+    .delete(deleteTask, isOwner);
 
 export default router;
 
