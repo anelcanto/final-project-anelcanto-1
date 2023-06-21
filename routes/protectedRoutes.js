@@ -2,7 +2,7 @@ import express from 'express';
 import { requireAuth } from '../middleware/authMiddleware.js';
 import { isAdmin, isOwner } from '../middleware/userMiddleware.js';
 import tasksRouter from './tasks.js';
-import usersRouter from './users.js';
+// import usersRouter from './users.js';
 
 const router = express.Router();
 
@@ -14,14 +14,14 @@ router.use('/tasks', tasksRouter);
 
 
 
-// Protected routes for users
-router.use('/users', (req, res, next) => {
-    // Check if user is an admin or owner of the user
-    if (isAdmin(req.user) || isOwner(req.user, req.params.id)) {
-        next();
-    } else {
-        res.status(401).json({ error: 'Unauthorized access' });
-    }
-}, usersRouter);
+// // Protected routes for users
+// router.use('/users', (req, res, next) => {
+//     // Check if user is an admin or owner of the user
+//     if (isAdmin(req.user) || isOwner(req.user, req.params.id)) {
+//         next();
+//     } else {
+//         res.status(401).json({ error: 'Unauthorized access' });
+//     }
+// }, usersRouter);
 
 export default router;
